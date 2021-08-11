@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import { Navbar, AppRouter } from './components';
+import { refreshToken } from './redux/actions/userAction';
 function App() {
+  const dispatch = useDispatch();
+  const isAuth = useSelector((state) => state.user.isAuth);
+
+  useEffect(() => {
+    if (localStorage.getItem('access')) {
+      dispatch(refreshToken());
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Navbar auth={isAuth} />
+      <AppRouter />
+    </BrowserRouter>
   );
 }
 
