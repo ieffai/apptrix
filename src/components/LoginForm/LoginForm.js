@@ -1,7 +1,9 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/actions/userAction';
 import { DialogContent, TextField, makeStyles, Button } from '@material-ui/core';
+import { HOME_ROUTE } from '../../utils/constants';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,9 +19,14 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginForm = () => {
   const classes = useStyles();
+  const history = useHistory();
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const dispatch = useDispatch();
+  const clickHandler = () => {
+    dispatch(login(username, password));
+    history.push(HOME_ROUTE);
+  };
   return (
     <DialogContent className={classes.root}>
       <TextField
@@ -40,11 +47,7 @@ const LoginForm = () => {
         margin="dense"
         fullWidth
       />
-      <Button
-        color="primary"
-        variant="contained"
-        className={classes.button}
-        onClick={() => dispatch(login(username, password))}>
+      <Button color="primary" variant="contained" className={classes.button} onClick={clickHandler}>
         Login
       </Button>
     </DialogContent>

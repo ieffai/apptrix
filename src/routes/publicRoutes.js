@@ -1,6 +1,6 @@
-import { Authorization, Main } from '../pages';
+import { Authorization, Home } from '../pages';
 
-import { AUTH_ROUTE, MAIN_ROUTE } from '../utils/constants';
+import { AUTH_ROUTE, HOME_ROUTE } from '../utils/constants';
 
 export const publicRoutes = [
   {
@@ -8,7 +8,7 @@ export const publicRoutes = [
     Component: Authorization,
   },
   {
-    path: MAIN_ROUTE,
-    Component: Main,
+    path: HOME_ROUTE,
+    Component: Home,
   },
 ];

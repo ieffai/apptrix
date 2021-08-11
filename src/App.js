@@ -15,7 +15,7 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar auth={isAuth} />
-      <AppRouter />
+      <AppRouter auth={isAuth} />
     </BrowserRouter>
   );
 }
