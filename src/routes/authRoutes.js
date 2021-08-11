@@ -1,6 +1,6 @@
-import { Tasks, Timesheets } from '../pages';
+import { Tasks, Timesheets, User } from '../pages';
 
-import { TASKS_ROUTE, SHEETS_ROUTE } from '../utils/constants';
+import { TASKS_ROUTE, SHEETS_ROUTE, USER_ROUTE } from '../utils/constants';
 
 export const authRoutes = [
   {
@@ -10,5 +10,9 @@ export const authRoutes = [
   {
     path: SHEETS_ROUTE,
     Component: Timesheets,
+  },
+  {
+    path: USER_ROUTE + '/:id',
+    Component: User,
   },
 ];

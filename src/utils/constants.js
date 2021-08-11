@@ -5,6 +5,7 @@ const AUTH_ROUTE = '/auth';
 const HOME_ROUTE = '/home';
 const TASKS_ROUTE = '/tasks';
 const SHEETS_ROUTE = '/sheets';
+const USER_ROUTE = '/user';
 
 export {
   AUTH_API_URL,
@@ -14,4 +15,5 @@ export {
   HOME_ROUTE,
   TASKS_ROUTE,
   SHEETS_ROUTE,
+  USER_ROUTE,
 };

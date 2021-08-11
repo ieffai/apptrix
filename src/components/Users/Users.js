@@ -1,7 +1,10 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUsers } from '../../redux/actions/userAction';
 import { DataGrid } from '@material-ui/data-grid';
+import { USER_ROUTE } from '../../utils/constants';
+import { setCurUser } from '../../redux/reducers/userReducer';
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 100 },
@@ -24,6 +27,7 @@ const columns = [
 ];
 
 const User = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.user.isAuth);
   const users = useSelector((state) => state.user.users);
@@ -31,14 +35,18 @@ const User = () => {
     isAuth && dispatch(fetchUsers());
   }, []);
   const rows = users;
+  const rowDataHandler = (rowData) => {
+    dispatch(setCurUser(rowData.row));
+    history.push(USER_ROUTE + '/' + rowData.id);
+  };
   return (
     <div style={{ height: 400, width: 630 }}>
       <DataGrid
         rows={rows}
         columns={columns}
         pageSize={5}
-        checkboxSelection
         disableSelectionOnClick
+        onRowClick={(rowData) => rowDataHandler(rowData)}
       />
     </div>
   );
