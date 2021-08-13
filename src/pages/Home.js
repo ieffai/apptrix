@@ -21,7 +21,7 @@ const Home = () => {
   const classes = useStyles();
   return (
     <Paper className={classes.content}>
-      <Container fixed>
+      <Container fixed maxWidth="md">
         {isAuth ? (
           <UsersTable />
         ) : (

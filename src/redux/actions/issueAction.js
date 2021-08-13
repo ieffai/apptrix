@@ -1,5 +1,5 @@
 import { $authHost } from '../../http/index';
-import { setIssues, setProjectNames } from '../reducers/issueReducer';
+import { setIssues, setProjectNames, setNewWorkItem } from '../reducers/issueReducer';
 
 export const fetchIssues = () => {
   return async (dispatch) => {
@@ -30,6 +30,24 @@ export const searchIssues = (search) => {
         },
       });
       dispatch(setIssues(data));
+    } catch (error) {
+      console.log(error.response?.data?.message);
+    }
+  };
+};
+
+export const getWorkItem = (id) => {
+  return async (dispatch) => {
+    try {
+      let { data } = await $authHost.get(`/workItems/128-${id}`, {
+        params: {
+          fields: 'id,author(name),duration(presentation),creator(name),updated',
+        },
+      });
+
+      data.name = data.author.name;
+      data.duration = data.duration.presentation;
+      dispatch(setNewWorkItem(data));
     } catch (error) {
       console.log(error.response?.data?.message);
     }

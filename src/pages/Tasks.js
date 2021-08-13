@@ -12,8 +12,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(8),
   },
   search: {
-    width: 900,
-    color: 'red',
+    width: 700,
   },
 }));
 const Tasks = () => {
@@ -44,8 +43,9 @@ const Tasks = () => {
   };
   return (
     <Paper className={classes.content}>
-      <Container fixed>
+      <Container fixed maxWidth="md">
         <Autocomplete
+          className={classes.search}
           freeSolo
           disableClearable
           options={names}

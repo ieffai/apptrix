@@ -8,7 +8,7 @@ export const authRoutes = [
     Component: Tasks,
   },
   {
-    path: SHEETS_ROUTE,
+    path: SHEETS_ROUTE + '/:id',
     Component: Timesheets,
   },
   {
