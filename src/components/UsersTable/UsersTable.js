@@ -26,15 +26,14 @@ const columns = [
   },
 ];
 
-const User = () => {
+const UserTable = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.user.isAuth);
   const users = useSelector((state) => state.user.users);
   React.useEffect(() => {
     isAuth && dispatch(fetchUsers());
-  }, []);
-  const rows = users;
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const rowDataHandler = (rowData) => {
     dispatch(setCurUser(rowData.row));
     history.push(USER_ROUTE + '/' + rowData.id);
@@ -42,9 +41,15 @@ const User = () => {
   return (
     <div style={{ height: 400, width: 630 }}>
       <DataGrid
-        rows={rows}
+        style={{ cursor: 'pointer' }}
+        rows={users}
         columns={columns}
-        pageSize={5}
+        options={{
+          paging: true,
+          pageSize: 20,
+          emptyRowsWhenPaging: true,
+          pageSizeOptions: [6, 12, 20, 50],
+        }}
         disableSelectionOnClick
         onRowClick={(rowData) => rowDataHandler(rowData)}
       />
@@ -52,4 +57,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default UserTable;

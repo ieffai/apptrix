@@ -2,10 +2,19 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../redux/actions/userAction';
-import { AppBar, Container, makeStyles, Toolbar, Typography, IconButton } from '@material-ui/core';
+import {
+  AppBar,
+  Container,
+  makeStyles,
+  Toolbar,
+  Typography,
+  IconButton,
+  Link,
+} from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { HOME_ROUTE, AUTH_ROUTE } from '../../utils/constants';
+import { menuData } from '../../utils/menuData';
 
 const useStyles = makeStyles((theme) => ({
   appbar: {
@@ -22,6 +31,20 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     color: '#fff',
     fontSize: '2rem',
+  },
+  link: {
+    margin: theme.spacing(1, 1.5),
+    border: 'none',
+    padding: '10px',
+    borderRadius: '5px',
+    position: 'relative',
+    boxSizing: 'border-box',
+    transition: 'all 500ms ease',
+    cursor: 'pointer',
+    '&:hover': {
+      boxShadow: 'inset 0 0 0 2px white',
+      textDecoration: 'none',
+    },
   },
 }));
 
@@ -45,9 +68,21 @@ const Navbar = ({ auth }) => {
             <span>Apptrix</span>
           </Typography>
           {auth ? (
-            <IconButton onClick={clickHandler} className={classes.icon}>
-              <ExitToAppIcon />
-            </IconButton>
+            <nav>
+              {menuData.map((item) => (
+                <Link
+                  color="inherit"
+                  variant="button"
+                  key={item.title}
+                  className={classes.link}
+                  onClick={() => history.push(item.path)}>
+                  {item.title}
+                </Link>
+              ))}
+              <IconButton onClick={clickHandler} className={classes.icon}>
+                <ExitToAppIcon />
+              </IconButton>
+            </nav>
           ) : (
             <IconButton onClick={() => history.push(AUTH_ROUTE)}>
               <AccountCircleIcon className={classes.icon} />

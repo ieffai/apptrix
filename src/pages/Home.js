@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
-import { Users } from '../components';
+import { UsersTable } from '../components';
 import { makeStyles, Paper, Container, Typography, Button } from '@material-ui/core';
 import { AUTH_ROUTE } from '../utils/constants';
 
@@ -23,7 +23,7 @@ const Home = () => {
     <Paper className={classes.content}>
       <Container fixed>
         {isAuth ? (
-          <Users />
+          <UsersTable />
         ) : (
           <div>
             <Typography variant="h5" gutterBottom>
