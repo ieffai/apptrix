@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { login } from '../../redux/actions/userAction';
+import { loginAction } from '../../redux/actions/userAction';
 import { DialogContent, TextField, makeStyles, Button } from '@material-ui/core';
 import { HOME_ROUTE } from '../../utils/constants';
 
@@ -20,11 +20,11 @@ const useStyles = makeStyles((theme) => ({
 const LoginForm = () => {
   const classes = useStyles();
   const history = useHistory();
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const clickHandler = () => {
-    dispatch(login(username, password));
+    dispatch(loginAction(username, password));
     history.push(HOME_ROUTE);
   };
   return (

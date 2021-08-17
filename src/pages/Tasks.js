@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchIssues, fetchIssues } from '../redux/actions/issueAction';
 import { TasksTable } from '../components';
-import { makeStyles, Paper, Container, TextField, Button } from '@material-ui/core';
+import { makeStyles, Paper, Container, TextField } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -32,7 +31,7 @@ const Tasks = () => {
       setSearchTimeout(
         setTimeout(
           (value) => {
-            dispatch(searchIssues(value));
+            names.includes(value) && dispatch(searchIssues(value));
           },
           500,
           e.target.value,
